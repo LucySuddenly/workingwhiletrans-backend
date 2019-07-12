@@ -4,8 +4,8 @@ class CompaniesController < ApplicationController
         fm = FuzzyMatch.new(Company.all, :read => :name)
         result = fm.find(params["searchForm"][0].downcase)
         if result == nil 
-            company = {none: "none"}
+            result = {none: "none"}
         end
-        render json: company
+        render json: result
     end
 end
