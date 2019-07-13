@@ -15,7 +15,7 @@ class CompaniesController < ApplicationController
             company.save
             render json: company
         else
-            render json: {message: }
+            render json: {message: "the company did not successfully save"}
         end 
     end
 
