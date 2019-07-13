@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
     end
 
     def create
-        company = Company.new(company_params)
+        company = Company.find_or_create_by(company_params)
         if company.valid?
             company.save
             render json: company
