@@ -10,6 +10,11 @@ class ReviewsController < ApplicationController
         end
     end
 
+    def show
+        review = Review.find(params[:id])
+        render json: review
+    end
+
     private 
 
     def review_params
