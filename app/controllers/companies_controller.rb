@@ -28,7 +28,7 @@ class CompaniesController < ApplicationController
         end
         company = company.to_json(:include => :reviews)
         company = JSON.parse(company)
-        render json: {company: company, ratings_average: (sum / length).to_f }
+        render json: {company: company, ratings_average: (sum.to_f / length.to_f) }
     end
 
     private
