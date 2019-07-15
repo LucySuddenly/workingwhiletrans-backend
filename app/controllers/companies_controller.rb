@@ -20,8 +20,15 @@ class CompaniesController < ApplicationController
     end
 
     def show 
+        sum = 0
         company = Company.find(params["id"])
-        render json: company
+        length = company.reviews.length
+        company.reviews.each do |review|
+            sum += review.rating
+        end
+        company = company.to_json(:include => :reviews)
+        company = JSON.parse(company)
+        render json: {company: company, ratings_average: (sum / length).to_f }
     end
 
     private
