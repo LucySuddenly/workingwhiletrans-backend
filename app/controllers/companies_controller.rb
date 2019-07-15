@@ -19,6 +19,11 @@ class CompaniesController < ApplicationController
         end 
     end
 
+    def show 
+        company = Company.find(params["id"])
+        render json: company
+    end
+
     private
 
     def company_params
