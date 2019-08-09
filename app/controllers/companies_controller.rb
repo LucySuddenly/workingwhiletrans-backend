@@ -12,6 +12,9 @@ class CompaniesController < ApplicationController
     def create
         company = Company.find_or_create_by(company_params)
         if company.valid?
+            if company.image_url[0..3] != "http"
+                company.image_url = "http://" + company.image_url
+            end
             company.save
             render json: company
         else
@@ -26,7 +29,7 @@ class CompaniesController < ApplicationController
         company.reviews.each do |review|
             sum += review.rating
         end
-        if sum.to_f / length.to_f != nil 
+        if length != 0 
             average = sum.to_f / length.to_f
         else
             average = 0
