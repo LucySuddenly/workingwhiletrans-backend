@@ -26,9 +26,14 @@ class CompaniesController < ApplicationController
         company.reviews.each do |review|
             sum += review.rating
         end
+        if sum.to_f / length.to_f != nil 
+            average = sum.to_f / length.to_f
+        else
+            average = 0
+        end
         company = company.to_json(:include => :reviews)
         company = JSON.parse(company)
-        render json: {company: company, ratings_average: (sum.to_f / length.to_f) }
+        render json: {company: company, ratings_average: average }
     end
 
     private
