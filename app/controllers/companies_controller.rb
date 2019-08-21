@@ -44,6 +44,12 @@ class CompaniesController < ApplicationController
         render json: {company: company, ratings_average: average }
     end
 
+    def update
+        company = Company.find(params["id"])
+        company.update(company_params)
+        render json: company
+    end
+
     private
 
     def company_params
