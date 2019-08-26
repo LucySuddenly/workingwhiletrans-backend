@@ -46,8 +46,11 @@ class CompaniesController < ApplicationController
 
     def update
         company = Company.find(params["id"])
-        company.update(company_params)
-        render json: company
+        if company.update(company_params)
+            render json: company
+        else
+            render json: {message: "the company did not successfully save"}
+        end
     end
 
     private
