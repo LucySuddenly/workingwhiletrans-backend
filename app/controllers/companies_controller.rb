@@ -3,12 +3,14 @@ class CompaniesController < ApplicationController
     def search
         results = []
         collection = Company.all.to_a
-        5.times do |i|
+        10.times do |i|
             fm = FuzzyMatch.new(collection, :read => :name)
             result = fm.find(params["searchForm"][0].downcase)
             if result != nil
                 results[i] = result
                 collection.slice!(collection.index(result))
+            else
+                break
             end
         end
         render json: results
